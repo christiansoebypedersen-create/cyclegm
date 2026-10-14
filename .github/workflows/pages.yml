@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24   # match local dev (npm 11) — npm 10 hoists the lockfile differently and fails `npm ci`
           cache: npm
       - run: npm ci
       - run: npm test
