@@ -23,9 +23,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 24   # match local dev (npm 11) — npm 10 hoists the lockfile differently and fails `npm ci`
+          node-version: 24
           cache: npm
-      - run: npm ci
+      # `npm install`, not `npm ci`: the lockfile is generated on macOS and lacks Linux-only optional deps
+      # (npm/cli#4828 — @emnapi/* for Vite 8's rolldown), which makes `npm ci` reject it. Versions still follow the lockfile.
+      - run: npm install --no-audit --no-fund
       - run: npm test
       - run: npm run build
         env:
