@@ -143,5 +143,5 @@ describe('app render smoke test', () => {
     }
 
     expect(boundaryErrors).toHaveLength(0)
-  })
+  }, 30000)   // walks every screen + simulates races — slower CI runners need more than vitest's 5s default
 })
